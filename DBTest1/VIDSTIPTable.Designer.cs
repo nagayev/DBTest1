@@ -1,6 +1,6 @@
 ﻿namespace DBTest1
 {
-    partial class StudentTable
+    partial class VIDSTIPTable
     {
         /// <summary>
         /// Required designer variable.
@@ -30,27 +30,26 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            studentsGridView = new DataGridView();
-            NSTUDENT = new DataGridViewTextBoxColumn();
-            FAMILYA = new DataGridViewTextBoxColumn();
-            IMYA = new DataGridViewTextBoxColumn();
-            OTCHESTVO = new DataGridViewTextBoxColumn();
+            vidstipGridView = new DataGridView();
+            NVID = new DataGridViewTextBoxColumn();
+            VIDSTIP = new DataGridViewTextBoxColumn();
+            SUMSTIP = new DataGridViewTextBoxColumn();
             studentBindingSource = new BindingSource(components);
             addButton = new Button();
             editButton = new Button();
             deleteButton = new Button();
             updateButton = new Button();
             quitButton = new Button();
-            ((System.ComponentModel.ISupportInitialize)studentsGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)vidstipGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)studentBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // studentsGridView
+            // vidstipGridView
             // 
-            studentsGridView.AllowUserToAddRows = false;
-            studentsGridView.AllowUserToDeleteRows = false;
-            studentsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            studentsGridView.BackgroundColor = SystemColors.Window;
+            vidstipGridView.AllowUserToAddRows = false;
+            vidstipGridView.AllowUserToDeleteRows = false;
+            vidstipGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            vidstipGridView.BackgroundColor = SystemColors.Window;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
@@ -58,39 +57,33 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            studentsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            studentsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            studentsGridView.Columns.AddRange(new DataGridViewColumn[] { NSTUDENT, FAMILYA, IMYA, OTCHESTVO });
-            studentsGridView.Location = new Point(2, 3);
-            studentsGridView.Name = "studentsGridView";
-            studentsGridView.RowHeadersWidth = 20;
-            studentsGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            studentsGridView.Size = new Size(971, 462);
-            studentsGridView.TabIndex = 0;
+            vidstipGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            vidstipGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            vidstipGridView.Columns.AddRange(new DataGridViewColumn[] { NVID, VIDSTIP, SUMSTIP });
+            vidstipGridView.Location = new Point(2, 3);
+            vidstipGridView.Name = "vidstipGridView";
+            vidstipGridView.RowHeadersWidth = 20;
+            vidstipGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            vidstipGridView.Size = new Size(971, 462);
+            vidstipGridView.TabIndex = 0;
             // 
-            // NSTUDENT
+            // NVID
             // 
-            NSTUDENT.HeaderText = "Идентификатор студента";
-            NSTUDENT.MinimumWidth = 6;
-            NSTUDENT.Name = "NSTUDENT";
+            NVID.HeaderText = "Идентификатор стипендии";
+            NVID.MinimumWidth = 6;
+            NVID.Name = "NVID";
             // 
-            // FAMILYA
+            // VIDSTIP
             // 
-            FAMILYA.HeaderText = "Фамилия";
-            FAMILYA.MinimumWidth = 6;
-            FAMILYA.Name = "FAMILYA";
+            VIDSTIP.HeaderText = "Вид стипендии";
+            VIDSTIP.MinimumWidth = 6;
+            VIDSTIP.Name = "VIDSTIP";
             // 
-            // IMYA
+            // SUMSTIP
             // 
-            IMYA.HeaderText = "Имя";
-            IMYA.MinimumWidth = 6;
-            IMYA.Name = "IMYA";
-            // 
-            // OTCHESTVO
-            // 
-            OTCHESTVO.HeaderText = "Отчество";
-            OTCHESTVO.MinimumWidth = 6;
-            OTCHESTVO.Name = "OTCHESTVO";
+            SUMSTIP.HeaderText = "Сумма стипендии";
+            SUMSTIP.MinimumWidth = 6;
+            SUMSTIP.Name = "SUMSTIP";
             // 
             // addButton
             // 
@@ -147,7 +140,7 @@
             quitButton.UseVisualStyleBackColor = true;
             quitButton.Click += quitButton_Click;
             // 
-            // StudentTable
+            // VIDSTIPTable
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -157,27 +150,26 @@
             Controls.Add(deleteButton);
             Controls.Add(editButton);
             Controls.Add(addButton);
-            Controls.Add(studentsGridView);
-            Name = "StudentTable";
-            Text = "Таблица: \"Студенты\"";
-            Load += StudentTable_Load;
-            ((System.ComponentModel.ISupportInitialize)studentsGridView).EndInit();
+            Controls.Add(vidstipGridView);
+            Name = "VIDSTIPTable";
+            Text = "Таблица: \"Стипендии\"";
+            Load += VIDSTIPTable_Load;
+            ((System.ComponentModel.ISupportInitialize)vidstipGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentBindingSource).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView studentsGridView;
-        private DataGridViewTextBoxColumn NSTUDENT;
-        private DataGridViewTextBoxColumn FAMILYA;
-        private DataGridViewTextBoxColumn IMYA;
-        private DataGridViewTextBoxColumn OTCHESTVO;
+        private DataGridView vidstipGridView;
         private Button addButton;
         private Button editButton;
         private Button deleteButton;
         private Button updateButton;
         private Button quitButton;
         private BindingSource studentBindingSource;
+        private DataGridViewTextBoxColumn NVID;
+        private DataGridViewTextBoxColumn VIDSTIP;
+        private DataGridViewTextBoxColumn SUMSTIP;
     }
 }

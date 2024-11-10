@@ -8,6 +8,9 @@ using FastReport.Utils;
 using FastReport.TypeConverters;
 using FastReport.Code;
 using FastReport.Data;
+using System.Data.SqlClient;
+//using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 /*
 using FastReport.Web.Handlers;
 using FastReport.Wizards;
@@ -45,34 +48,77 @@ namespace DBTest1
             studentTable.Show();
         }
 
+        //Запросы
+
         private void requestStudentsListMenuItem_Click(object sender, EventArgs e)
         {
             StudentListRequest studentListRequest = new StudentListRequest();
             studentListRequest.Show();
         }
 
+        private void списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VIDSTIPRequest vidstipRequest = new VIDSTIPRequest();
+            vidstipRequest.Show();
+        }
+
+        //Отчеты
+
         public DataSet BindData()
         {
             DataSet _dataSet = new DataSet();
-            /*SqlConnection con = new SqlConnection(sql);
-            SqlCommand cmd = new SqlCommand("select * from cities", con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            var con = new System.Data.SQLite.SQLiteConnection("Data Source=bd.db");
+            var cmd = new System.Data.SQLite.SQLiteCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "select * from vidstip ORDER BY VIDSTIP";
+            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
             da.Fill(_dataSet);
             con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();*/
+            con.Close();
             return _dataSet;
+        }
+
+        public DataTable BindData2()
+        {
+            DataTable dataTable = new DataTable();
+            var con = new System.Data.SQLite.SQLiteConnection("Data Source=bd.db");
+            var cmd = new System.Data.SQLite.SQLiteCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "select * from vidstip ORDER BY VIDSTIP";
+            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+            da.Fill(dataTable);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            return dataTable;
         }
 
         private void report1MenuItem_Click(object sender, EventArgs e)
         {
+            Report report = new Report();
+            // Добавляем источник данных в отчет
+            DataTable dataTable = new DataTable();
+            dataTable = BindData2();
+            report.RegisterData(dataTable, "VIDSTIP");
+
+            // Создаем макет отчета
+            report.Load("report1.frx"); // Замените на путь к вашему файлу отчета
+
+            // Настраиваем отчет
+            report.GetDataSource("VIDSTIP").Enabled = true;
+
+            // Печатаем отчет
+            report.Prepare();
+            report.Show();
+            //dead code
+            return;
             DataSet _dataSet = new DataSet();
             _dataSet = BindData();
-            Report report = new Report();
             // register the "Cities" table
-            report.RegisterData(_dataSet.Tables[0], "Cities");
+            report.RegisterData(_dataSet.Tables[0], "vidstip");
             // enable it to use in a report
-            report.GetDataSource("Cities").Enabled = true;
+            report.GetDataSource("vidstip").Enabled = true;
             // create A4 page with all margins set to 1cm
             ReportPage page1 = new ReportPage();
             page1.Name = "Page1";
@@ -84,10 +130,10 @@ namespace DBTest1
             page1.ReportTitle.Height = Units.Centimeters * 1.5f;
             // create group header
             GroupHeaderBand group1 = new GroupHeaderBand();
-            group1.Name = "Cities Data";
+            group1.Name = "АА";
             group1.Height = Units.Centimeters * 1;
             // set group condition
-            group1.Condition = "[Cities.CityName]";//[Cities.CityName].Substring(0, 1)
+            group1.Condition = "[vidstip.VIDSTIP]";//[Cities.CityName].Substring(0, 1)
             // add group to the page.Bands collection
             page1.Bands.Add(group1);
             // create group footer
@@ -99,7 +145,7 @@ namespace DBTest1
             data1.Name = "Data1";
             data1.Height = Units.Centimeters * 0.5f;
             // set data source
-            data1.DataSource = report.GetDataSource("Cities");
+            data1.DataSource = report.GetDataSource("vidstip");
             // connect databand to a group
             group1.Data = data1;
             // create "Text" objects
@@ -110,7 +156,7 @@ namespace DBTest1
             text1.Bounds = new System.Drawing.RectangleF(0, 0,
             Units.Centimeters * 19, Units.Centimeters * 1);
             // set text
-            text1.Text = "CitiesData";
+            text1.Text = "Список видов стипендии по алфавиту";
             // set appearance
             text1.HorzAlign = HorzAlign.Center;
             text1.Font = new System.Drawing.Font("Tahoma", 14, FontStyle.Bold);
@@ -121,11 +167,18 @@ namespace DBTest1
             text2.Name = "Text2";
             text2.Bounds = new RectangleF(0, 0,
             Units.Centimeters * 2, Units.Centimeters * 1);
-            text2.Text = "[Cities.CityName]";//[Cities.CityName].Substring(0, 1)
+            text2.Text = "[vidstip.SUMSTIP]";//[Cities.CityName].Substring(0, 1)
             text2.Font = new Font("Tahoma", 10, FontStyle.Bold);
             // add it to GroupHeader
             group1.Objects.Add(text2);
-            report.Prepare();
+            report.Show();
         }
+
+        private void stipsMenuItem_Click(object sender, EventArgs e)
+        {
+            VIDSTIPTable vidstipTable = new VIDSTIPTable();
+            vidstipTable.Show();
+        }
+
     }
 }

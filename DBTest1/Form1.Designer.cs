@@ -79,6 +79,7 @@
             stipsMenuItem.Name = "stipsMenuItem";
             stipsMenuItem.Size = new Size(453, 26);
             stipsMenuItem.Text = "\"Стипендии\"";
+            stipsMenuItem.Click += stipsMenuItem_Click;
             // 
             // studentStipsMenuItem
             // 
@@ -117,6 +118,7 @@
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Name = "списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem";
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Size = new Size(556, 26);
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Text = "Список видов стидендий в указанном дипазоне суммы стипендии";
+            списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Click += списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem_Click;
             // 
             // списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem
             // 

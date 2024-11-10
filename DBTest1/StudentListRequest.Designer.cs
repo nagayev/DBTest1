@@ -43,6 +43,8 @@
             // 
             // studentsGridView
             // 
+            studentsGridView.AllowUserToAddRows = false;
+            studentsGridView.AllowUserToDeleteRows = false;
             studentsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             studentsGridView.BackgroundColor = SystemColors.Window;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -58,6 +60,7 @@
             studentsGridView.Location = new Point(2, 3);
             studentsGridView.Name = "studentsGridView";
             studentsGridView.RowHeadersWidth = 20;
+            studentsGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             studentsGridView.Size = new Size(971, 462);
             studentsGridView.TabIndex = 0;
             // 

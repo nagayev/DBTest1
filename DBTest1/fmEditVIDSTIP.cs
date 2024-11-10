@@ -11,12 +11,16 @@ using static FastReport.RichTextParser.RFont;
 
 namespace DBTest1
 {
-    public partial class fmEditSTUDENT : Form
+    public partial class fmEditVIDSTIP : Form
     {
-        public string? FAMILYA, IMYA, OTCHESTVO;
-        public fmEditSTUDENT()
+        public string VIDSTIP, SUMSTIP;
+        public fmEditVIDSTIP(string vidstip1, string sumstip1)
         {
+            VIDSTIP = vidstip1;
+            SUMSTIP = sumstip1;
             InitializeComponent();
+            sumstip.Text = sumstip1;
+            vidstip.Text = vidstip1;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -26,9 +30,8 @@ namespace DBTest1
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            IMYA = imia.Text;
-            FAMILYA = familiya.Text;
-            OTCHESTVO = otchestvo.Text;
+            SUMSTIP = sumstip.Text;
+            VIDSTIP = vidstip.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

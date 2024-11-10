@@ -1,6 +1,6 @@
 ﻿namespace DBTest1
 {
-    partial class fmEditSTUDENT
+    partial class fmAddVIDSTIP
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,10 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            familiya = new TextBox();
-            imia = new TextBox();
-            otchestvo = new TextBox();
-            okButton = new Button();
-            cancelButton = new Button();
+            vidstip = new TextBox();
+            sumstip = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
             horizontalLine = new Label();
             SuspendLayout();
             // 
@@ -45,9 +44,9 @@
             label1.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label1.Location = new Point(202, 77);
             label1.Name = "label1";
-            label1.Size = new Size(93, 24);
+            label1.Size = new Size(145, 24);
             label1.TabIndex = 0;
-            label1.Text = "Фамилия";
+            label1.Text = "Вид стипендии";
             // 
             // label2
             // 
@@ -55,9 +54,9 @@
             label2.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label2.Location = new Point(202, 149);
             label2.Name = "label2";
-            label2.Size = new Size(47, 24);
+            label2.Size = new Size(230, 24);
             label2.TabIndex = 1;
-            label2.Text = "Имя";
+            label2.Text = "Сумма стипендии (руб.)";
             // 
             // label3
             // 
@@ -65,77 +64,68 @@
             label3.Font = new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label3.Location = new Point(202, 223);
             label3.Name = "label3";
-            label3.Size = new Size(94, 24);
+            label3.Size = new Size(0, 24);
             label3.TabIndex = 2;
-            label3.Text = "Отчество";
             // 
-            // familiya
+            // vidstip
             // 
-            familiya.Location = new Point(360, 78);
-            familiya.Name = "familiya";
-            familiya.Size = new Size(125, 27);
-            familiya.TabIndex = 3;
+            vidstip.Location = new Point(458, 78);
+            vidstip.Name = "vidstip";
+            vidstip.Size = new Size(211, 27);
+            vidstip.TabIndex = 3;
             // 
-            // imia
+            // sumstip
             // 
-            imia.Location = new Point(360, 150);
-            imia.Name = "imia";
-            imia.Size = new Size(125, 27);
-            imia.TabIndex = 4;
+            sumstip.Location = new Point(458, 146);
+            sumstip.Name = "sumstip";
+            sumstip.Size = new Size(156, 27);
+            sumstip.TabIndex = 4;
             // 
-            // otchestvo
+            // button1
             // 
-            otchestvo.Location = new Point(360, 224);
-            otchestvo.Name = "otchestvo";
-            otchestvo.Size = new Size(125, 27);
-            otchestvo.TabIndex = 5;
+            button1.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button1.Location = new Point(311, 294);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 6;
+            button1.Text = "OK";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // okButton
+            // button2
             // 
-            okButton.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            okButton.Location = new Point(311, 351);
-            okButton.Name = "okButton";
-            okButton.Size = new Size(94, 29);
-            okButton.TabIndex = 6;
-            okButton.Text = "OK";
-            okButton.UseVisualStyleBackColor = true;
-            okButton.Click += okButton_Click;
-            // 
-            // cancelButton
-            // 
-            cancelButton.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            cancelButton.Location = new Point(632, 351);
-            cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(97, 29);
-            cancelButton.TabIndex = 7;
-            cancelButton.Text = "Отменить";
-            cancelButton.UseVisualStyleBackColor = true;
-            cancelButton.Click += cancelButton_Click;
+            button2.Font = new Font("Tahoma", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button2.Location = new Point(631, 294);
+            button2.Name = "button2";
+            button2.Size = new Size(97, 29);
+            button2.TabIndex = 7;
+            button2.Text = "Отменить";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // horizontalLine
             // 
             horizontalLine.BorderStyle = BorderStyle.Fixed3D;
-            horizontalLine.Location = new Point(-2, 327);
+            horizontalLine.Location = new Point(-2, 247);
             horizontalLine.Name = "horizontalLine";
             horizontalLine.Size = new Size(760, 2);
             horizontalLine.TabIndex = 8;
             // 
-            // fmEditSTUDENT
+            // fmAddVIDSTIP
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(770, 400);
+            ClientSize = new Size(770, 342);
             Controls.Add(horizontalLine);
-            Controls.Add(cancelButton);
-            Controls.Add(okButton);
-            Controls.Add(otchestvo);
-            Controls.Add(imia);
-            Controls.Add(familiya);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(sumstip);
+            Controls.Add(vidstip);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "fmEditSTUDENT";
-            Text = "Редактировать запись";
+            Name = "fmAddVIDSTIP";
+            Text = "Добавить запись";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -145,11 +135,10 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox familiya;
-        private TextBox imia;
-        private TextBox otchestvo;
-        private Button okButton;
-        private Button cancelButton;
+        private TextBox vidstip;
+        private TextBox sumstip;
+        private Button button1;
+        private Button button2;
         private Label horizontalLine;
     }
 }

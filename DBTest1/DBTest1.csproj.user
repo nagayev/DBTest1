@@ -4,7 +4,13 @@
     <Compile Update="fmAddSTUDENT.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fmAddVIDSTIP.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fmEditStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="fmEditVIDSTIP.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">
@@ -14,6 +20,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="StudentTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VIDSTIPRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VIDSTIPTable.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
