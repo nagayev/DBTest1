@@ -32,7 +32,7 @@ namespace DBTest1
                 max = Int32.Parse(maxTextBox.Text);
             }
             catch {
-                MessageBox.Show("a", "b");
+                MessageBox.Show("Ошибка", "Некорректно введены данные");
                 return;
             }
             command.CommandText = $"SELECT VIDSTIP,SUMSTIP FROM VIDSTIP WHERE SUMSTIP BETWEEN {min} AND {max}";

@@ -12,11 +12,11 @@ using System.Data.SqlClient;
 
 namespace DBTest1
 {
-    public partial class VIDSTIPTable : Form
+    public partial class STUDENTSTIPSTable : Form
     {
         private SqliteConnection connection;
         private int autoincrementId;
-        public VIDSTIPTable()
+        public STUDENTSTIPSTable()
         {
             InitializeComponent();
         }
@@ -27,24 +27,26 @@ namespace DBTest1
             if (dialogResult == DialogResult.Yes)
             {
                 DataGridViewRow Current = vidstipGridView.CurrentRow;
-                var id = Current.Cells[0].Value.ToString();
+                var studentId = studentGridView.CurrentRow.Cells[0].Value.ToString();
+                var nvidStr = Current.Cells[0].Value.ToString();
                 vidstipGridView.Rows.RemoveAt(Current.Index);
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = "DELETE FROM VIDSTIP WHERE NVID=" + id;
+                command.CommandText = $"DELETE FROM STIPENDIYA WHERE NSTUDENT={studentId} AND NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{nvidStr}')";
                 int number = command.ExecuteNonQuery();
             }
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            string param1 = vidstipGridView.SelectedRows[0].Cells[1].Value.ToString();
-            string param2 = vidstipGridView.SelectedRows[0].Cells[2].Value.ToString();
-            fmEditVIDSTIP fmEditVIDSTIP = new fmEditVIDSTIP(param1, param2);
-            var result = fmEditVIDSTIP.ShowDialog();
+            //Вид стипендии, сумма
+            string vid = vidstipGridView.SelectedRows[0].Cells[0].Value.ToString();
+            string sum = vidstipGridView.SelectedRows[0].Cells[1].Value.ToString();
+            fmEditVIDSTIP2 fmEditVIDSTIP2 = new fmEditVIDSTIP2(vid, sum);
+            var result = fmEditVIDSTIP2.ShowDialog();
             if (result == DialogResult.OK)
             {
-                var selectedRows = vidstipGridView.SelectedRows;
+                var selectedRows = studentGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
                     MessageBox.Show("Ошибка", "Не выбран!");
@@ -52,16 +54,15 @@ namespace DBTest1
                 }
                 string NVID_s = selectedRows[0].Cells[0].Value.ToString();
                 int NVID = Int32.Parse(NVID_s);
-                string VIDSTIP = fmEditVIDSTIP.VIDSTIP;            //values preserved after close
-                string SUMSTIP = fmEditVIDSTIP.SUMSTIP;
-                //Do something here with these values
+                string VIDSTIP = fmEditVIDSTIP2.VIDSTIP;            //values preserved after close
+                string nstudent = selectedRows[0].Cells[0].Value.ToString(); //FIXME
+                string oldVIDSTIP = vid;
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE VIDSTIP SET VIDSTIP='{VIDSTIP}', SUMSTIP='{SUMSTIP}' WHERE NVID={NVID}";
+                command.CommandText = $"UPDATE STIPENDIYA SET NSTUDENT = {nstudent}, NVID = (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}') WHERE NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{oldVIDSTIP}')";
                 int number = command.ExecuteNonQuery();
-                //for example
-                selectedRows[0].Cells[1].Value = VIDSTIP;
-                selectedRows[0].Cells[2].Value = SUMSTIP;
+                vidstipGridView.SelectedRows[0].Cells[0].Value = VIDSTIP;
+                vidstipGridView.SelectedRows[0].Cells[1].Value = SUMSTIP;
 
                 //studentsGridView.Rows.Add(autoincrementId, FAMILIYA, IMYA, OTCHESTVO);
             }
@@ -69,30 +70,30 @@ namespace DBTest1
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            fmAddVIDSTIP fmVidStip = new fmAddVIDSTIP();
-            var result = fmVidStip.ShowDialog();
+            fmAddVIDSTIP2 fmVidStip2 = new fmAddVIDSTIP2();
+            var result = fmVidStip2.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string VIDSTIP = fmVidStip.VIDSTIP;            //values preserved after close
-                string SUMSTIP = fmVidStip.SUMSTIP;
+                string VIDSTIP = fmVidStip2.VIDSTIP;            //values preserved after close
+                string SUMSTIP = fmVidStip2.SUMSTIP;
+                var nstudent = studentGridView.SelectedRows[0].Cells[0].Value.ToString();
                 //Do something here with these values
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"INSERT INTO VIDSTIP(VIDSTIP,SUMSTIP) VALUES ('{VIDSTIP}', {SUMSTIP})";
-                MessageBox.Show("a", command.CommandText);
+                command.CommandText = $"INSERT INTO STIPENDIYA(NSTUDENT,NVID) VALUES ({nstudent}, (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}'))";
                 int number = command.ExecuteNonQuery();
                 //for example
                 autoincrementId++;
-                vidstipGridView.Rows.Add(autoincrementId, VIDSTIP, SUMSTIP);
+                vidstipGridView.Rows.Add(VIDSTIP, SUMSTIP);
             }
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            vidstipGridView.Rows.Clear();
+            studentGridView.Rows.Clear();
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
-            command.CommandText = "SELECT * FROM VIDSTIP";
+            command.CommandText = "SELECT * FROM STUDENT";
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
@@ -101,10 +102,11 @@ namespace DBTest1
                     while (reader.Read())   // построчно считываем данные
                     {
                         var id = reader.GetValue(0);
-                        var vidstip = reader.GetValue(1);
-                        var sum = reader.GetValue(2);
+                        var fam = reader.GetValue(1);
+                        var imya = reader.GetValue(2);
+                        var otchestvo = reader.GetValue(3);
 
-                        vidstipGridView.Rows.Add(id, vidstip, sum);
+                        studentGridView.Rows.Add(id, fam, imya, otchestvo);
                     }
                 }
             }
@@ -115,7 +117,7 @@ namespace DBTest1
             this.Close();
         }
 
-        private void VIDSTIPTable_Load(object sender, EventArgs e)
+        private void STUDENTSTIPSTable_Load(object sender, EventArgs e)
         {
             connection = new SqliteConnection("Data Source=bd.db");
             connection.Open();
@@ -127,6 +129,29 @@ namespace DBTest1
             {
                 reader.Read();
                 autoincrementId = int.Parse(reader.GetValue(0).ToString());
+            }
+        }
+
+        private void studentGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            var NSTUDENT = studentGridView.SelectedRows[0].Cells[0].Value;
+            vidstipGridView.Rows.Clear();
+            SqliteCommand command = new SqliteCommand();
+            command.Connection = connection;
+            command.CommandText = $"SELECT VIDSTIP,SUMSTIP FROM VIDSTIP WHERE NVID IN (SELECT NVID FROM STIPENDIYA WHERE NSTUDENT={NSTUDENT})";
+
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                if (reader.HasRows) // если есть данные
+                {
+                    while (reader.Read())   // построчно считываем данные
+                    {
+                        var vidstip = reader.GetValue(0);
+                        var sumstip = reader.GetValue(1);
+
+                        vidstipGridView.Rows.Add(vidstip, sumstip);
+                    }
+                }
             }
         }
     }

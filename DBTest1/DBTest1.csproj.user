@@ -7,16 +7,25 @@
     <Compile Update="fmAddVIDSTIP.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fmAddVIDSTIP2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fmEditStudent.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="fmEditVIDSTIP.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fmEditVIDSTIP2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="StudentListRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="STUDENTSTIPSTable.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="StudentTable.cs">
@@ -26,6 +35,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="VIDSTIPTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VYPLATYRequest.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

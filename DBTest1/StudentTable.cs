@@ -23,13 +23,17 @@ namespace DBTest1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            DataGridViewRow Current = studentsGridView.CurrentRow;
-            var id = Current.Cells[0].Value.ToString();
-            studentsGridView.Rows.RemoveAt(Current.Index);
-            SqliteCommand command = new SqliteCommand();
-            command.Connection = connection;
-            command.CommandText = "DELETE FROM STUDENT WHERE NSTUDENT="+id;
-            int number = command.ExecuteNonQuery();
+            DialogResult dialogResult =  MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DataGridViewRow Current = studentsGridView.CurrentRow;
+                var id = Current.Cells[0].Value.ToString();
+                studentsGridView.Rows.RemoveAt(Current.Index);
+                SqliteCommand command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM STUDENT WHERE NSTUDENT=" + id;
+                int number = command.ExecuteNonQuery();
+            }
         }
 
         private void editButton_Click(object sender, EventArgs e)

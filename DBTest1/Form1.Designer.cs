@@ -39,7 +39,7 @@
             запросыToolStripMenuItem = new ToolStripMenuItem();
             requestStudentsListMenuItem = new ToolStripMenuItem();
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem = new ToolStripMenuItem();
-            списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem = new ToolStripMenuItem();
+            requestVyplatyMenuItem = new ToolStripMenuItem();
             отчетыToolStripMenuItem = new ToolStripMenuItem();
             report1MenuItem = new ToolStripMenuItem();
             report2MenuItem = new ToolStripMenuItem();
@@ -86,22 +86,25 @@
             studentStipsMenuItem.Name = "studentStipsMenuItem";
             studentStipsMenuItem.Size = new Size(453, 26);
             studentStipsMenuItem.Text = "\"Студент - назначаемая студенту стипендия\"";
+            studentStipsMenuItem.Click += studentStipsMenuItem_Click;
             // 
             // видСтипендииНазначаемаяToolStripMenuItem
             // 
             видСтипендииНазначаемаяToolStripMenuItem.Name = "видСтипендииНазначаемаяToolStripMenuItem";
             видСтипендииНазначаемаяToolStripMenuItem.Size = new Size(453, 26);
             видСтипендииНазначаемаяToolStripMenuItem.Text = "\"Вид стипендии - назначаемая студенту стипендия\"";
+            видСтипендииНазначаемаяToolStripMenuItem.Click += видСтипендииНазначаемаяToolStripMenuItem_Click;
             // 
             // студентВыплатыСтудентаToolStripMenuItem
             // 
             студентВыплатыСтудентаToolStripMenuItem.Name = "студентВыплатыСтудентаToolStripMenuItem";
             студентВыплатыСтудентаToolStripMenuItem.Size = new Size(453, 26);
             студентВыплатыСтудентаToolStripMenuItem.Text = "\"Студент - выплаты студента\"";
+            студентВыплатыСтудентаToolStripMenuItem.Click += студентВыплатыСтудентаToolStripMenuItem_Click;
             // 
             // запросыToolStripMenuItem
             // 
-            запросыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { requestStudentsListMenuItem, списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem, списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem });
+            запросыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { requestStudentsListMenuItem, списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem, requestVyplatyMenuItem });
             запросыToolStripMenuItem.Name = "запросыToolStripMenuItem";
             запросыToolStripMenuItem.Size = new Size(84, 24);
             запросыToolStripMenuItem.Text = "Запросы";
@@ -120,11 +123,12 @@
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Text = "Список видов стидендий в указанном дипазоне суммы стипендии";
             списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem.Click += списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem_Click;
             // 
-            // списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem
+            // requestVyplatyMenuItem
             // 
-            списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem.Name = "списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem";
-            списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem.Size = new Size(556, 26);
-            списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem.Text = "Список выплат указанного студента за указанный период";
+            requestVyplatyMenuItem.Name = "requestVyplatyMenuItem";
+            requestVyplatyMenuItem.Size = new Size(556, 26);
+            requestVyplatyMenuItem.Text = "Список выплат указанного студента за указанный период";
+            requestVyplatyMenuItem.Click += списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem_Click;
             // 
             // отчетыToolStripMenuItem
             // 
@@ -145,6 +149,7 @@
             report2MenuItem.Name = "report2MenuItem";
             report2MenuItem.Size = new Size(496, 26);
             report2MenuItem.Text = "Список студентов, получающих указанный вид стипендии";
+            report2MenuItem.Click += report2MenuItem_Click;
             // 
             // report3MenuItem
             // 
@@ -204,7 +209,7 @@
         private ToolStripMenuItem студентВыплатыСтудентаToolStripMenuItem;
         private ToolStripMenuItem requestStudentsListMenuItem;
         private ToolStripMenuItem списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem;
-        private ToolStripMenuItem списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem;
+        private ToolStripMenuItem requestVyplatyMenuItem;
         private ToolStripMenuItem report1MenuItem;
         private ToolStripMenuItem report2MenuItem;
         private ToolStripMenuItem report3MenuItem;
