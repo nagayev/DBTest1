@@ -1,4 +1,4 @@
-﻿namespace DBTest1
+п»їnamespace DBTest1
 {
     partial class fmEditVIDSTIP
     {
@@ -45,7 +45,7 @@
             label1.Name = "label1";
             label1.Size = new Size(145, 24);
             label1.TabIndex = 0;
-            label1.Text = "Вид стипендии";
+            label1.Text = "Р’РёРґ СЃС‚РёРїРµРЅРґРёРё";
             // 
             // label2
             // 
@@ -55,7 +55,7 @@
             label2.Name = "label2";
             label2.Size = new Size(230, 24);
             label2.TabIndex = 1;
-            label2.Text = "Сумма стипендии (руб.)";
+            label2.Text = "РЎСѓРјРјР° СЃС‚РёРїРµРЅРґРёРё (СЂСѓР±.)";
             // 
             // vidstip
             // 
@@ -89,7 +89,7 @@
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(97, 29);
             cancelButton.TabIndex = 7;
-            cancelButton.Text = "Отменить";
+            cancelButton.Text = "РћС‚РјРµРЅРёС‚СЊ";
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
@@ -114,7 +114,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "fmEditVIDSTIP";
-            Text = "Редактировать запись";
+            Text = "Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ Р·Р°РїРёСЃСЊ";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,4 +1,4 @@
-﻿using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,16 +40,16 @@ namespace DBTest1
         {
             connection = new SqliteConnection("Data Source=bd.db");
             connection.Open();
-            //Заполняем combobox
+            //Р—Р°РїРѕР»РЅСЏРµРј combobox
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
             command.CommandText = "SELECT VIDSTIP FROM VIDSTIP";
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // если есть данные
+                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
                 {
-                    while (reader.Read())   // построчно считываем данные
+                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
                     {
                         var vidstip1 = reader.GetValue(0);
 
@@ -68,9 +68,9 @@ namespace DBTest1
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // если есть данные
+                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
                 {
-                    while (reader.Read())   // построчно считываем данные
+                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
                     {
                         var sumstip1 = reader.GetValue(0);
 

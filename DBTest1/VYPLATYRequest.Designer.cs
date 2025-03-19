@@ -1,4 +1,4 @@
-﻿namespace DBTest1
+п»їnamespace DBTest1
 {
     partial class VYPLATYRequest
     {
@@ -71,14 +71,14 @@
             // 
             // DATAVYPLATY
             // 
-            DATAVYPLATY.HeaderText = "Дата выплаты";
+            DATAVYPLATY.HeaderText = "Р”Р°С‚Р° РІС‹РїР»Р°С‚С‹";
             DATAVYPLATY.MinimumWidth = 6;
             DATAVYPLATY.Name = "DATAVYPLATY";
             DATAVYPLATY.Width = 339;
             // 
             // SUMVYPLATY
             // 
-            SUMVYPLATY.HeaderText = "Сумма выплаты";
+            SUMVYPLATY.HeaderText = "РЎСѓРјРјР° РІС‹РїР»Р°С‚С‹";
             SUMVYPLATY.MinimumWidth = 6;
             SUMVYPLATY.Name = "SUMVYPLATY";
             SUMVYPLATY.Width = 338;
@@ -90,7 +90,7 @@
             printButton.Name = "printButton";
             printButton.Size = new Size(94, 29);
             printButton.TabIndex = 4;
-            printButton.Text = "Вывести";
+            printButton.Text = "Р’С‹РІРµСЃС‚Рё";
             printButton.UseVisualStyleBackColor = true;
             printButton.Click += updateButton_Click;
             // 
@@ -101,7 +101,7 @@
             quitButton.Name = "quitButton";
             quitButton.Size = new Size(94, 29);
             quitButton.TabIndex = 5;
-            quitButton.Text = "Отменить";
+            quitButton.Text = "РћС‚РјРµРЅРёС‚СЊ";
             quitButton.UseVisualStyleBackColor = true;
             quitButton.Click += quitButton_Click;
             // 
@@ -113,7 +113,7 @@
             label2.Name = "label2";
             label2.Size = new Size(160, 18);
             label2.TabIndex = 7;
-            label2.Text = "Фамилия студента:";
+            label2.Text = "Р¤Р°РјРёР»РёСЏ СЃС‚СѓРґРµРЅС‚Р°:";
             // 
             // label3
             // 
@@ -123,7 +123,7 @@
             label3.Name = "label3";
             label3.Size = new Size(134, 18);
             label3.TabIndex = 9;
-            label3.Text = "Период выплат:";
+            label3.Text = "РџРµСЂРёРѕРґ РІС‹РїР»Р°С‚:";
             // 
             // famCombo
             // 
@@ -157,7 +157,7 @@
             label1.Name = "label1";
             label1.Size = new Size(34, 18);
             label1.TabIndex = 14;
-            label1.Text = "От:";
+            label1.Text = "РћС‚:";
             label1.Click += label1_Click_1;
             // 
             // label4
@@ -168,7 +168,7 @@
             label4.Name = "label4";
             label4.Size = new Size(34, 18);
             label4.TabIndex = 15;
-            label4.Text = "До:";
+            label4.Text = "Р”Рѕ:";
             // 
             // VYPLATYRequest
             // 
@@ -186,7 +186,7 @@
             Controls.Add(printButton);
             Controls.Add(vyplatyGridView);
             Name = "VYPLATYRequest";
-            Text = "Список выплат студента за указанный период";
+            Text = "РЎРїРёСЃРѕРє РІС‹РїР»Р°С‚ СЃС‚СѓРґРµРЅС‚Р° Р·Р° СѓРєР°Р·Р°РЅРЅС‹Р№ РїРµСЂРёРѕРґ";
             Load += VYPLATYRequest_Load;
             ((System.ComponentModel.ISupportInitialize)vyplatyGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentBindingSource).EndInit();

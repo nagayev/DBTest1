@@ -1,4 +1,4 @@
-﻿using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace DBTest1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("РЈРґР°Р»РµРЅРёРµ", "РЈРґР°Р»РёС‚СЊ С‚РµРєСѓС‰СѓСЋ Р·Р°РїРёСЃСЊ", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 DataGridViewRow Current = vidstipGridView.CurrentRow;
@@ -47,7 +47,7 @@ namespace DBTest1
                 var selectedRows = vidstipGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
-                    MessageBox.Show("Ошибка", "Не выбран!");
+                    MessageBox.Show("РћС€РёР±РєР°", "РќРµ РІС‹Р±СЂР°РЅ!");
                     return;
                 }
                 string NVID_s = selectedRows[0].Cells[0].Value.ToString();
@@ -96,9 +96,9 @@ namespace DBTest1
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // если есть данные
+                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
                 {
-                    while (reader.Read())   // построчно считываем данные
+                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
                     {
                         var id = reader.GetValue(0);
                         var vidstip = reader.GetValue(1);

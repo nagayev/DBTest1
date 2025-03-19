@@ -1,4 +1,4 @@
-﻿namespace DBTest1
+п»їnamespace DBTest1
 {
     partial class fmAddVIDSTIP2
     {
@@ -47,7 +47,7 @@
             label1.Name = "label1";
             label1.Size = new Size(145, 24);
             label1.TabIndex = 0;
-            label1.Text = "Вид стипендии";
+            label1.Text = "Р’РёРґ СЃС‚РёРїРµРЅРґРёРё";
             // 
             // label2
             // 
@@ -57,7 +57,7 @@
             label2.Name = "label2";
             label2.Size = new Size(230, 24);
             label2.TabIndex = 1;
-            label2.Text = "Сумма стипендии (руб.)";
+            label2.Text = "РЎСѓРјРјР° СЃС‚РёРїРµРЅРґРёРё (СЂСѓР±.)";
             // 
             // label3
             // 
@@ -86,7 +86,7 @@
             button2.Name = "button2";
             button2.Size = new Size(97, 29);
             button2.TabIndex = 7;
-            button2.Text = "Отменить";
+            button2.Text = "РћС‚РјРµРЅРёС‚СЊ";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -141,7 +141,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "fmAddVIDSTIP2";
-            Text = "Добавить запись";
+            Text = "Р”РѕР±Р°РІРёС‚СЊ Р·Р°РїРёСЃСЊ";
             Load += fmAddVIDSTIP2_Load;
             ResumeLayout(false);
             PerformLayout();
