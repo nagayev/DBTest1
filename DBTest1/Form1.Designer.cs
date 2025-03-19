@@ -156,6 +156,7 @@
             report3MenuItem.Name = "report3MenuItem";
             report3MenuItem.Size = new Size(496, 26);
             report3MenuItem.Text = "Список выплат указанного студента";
+            report3MenuItem.Click += report3MenuItem_Click;
             // 
             // toolStripMenuItem1
             // 

@@ -30,8 +30,8 @@ namespace DBTest1
 
         private void aboutDeveloperMenu_Click(object sender, EventArgs e)
         {
-            string message = "Р”Р°РЅРЅРѕРµ РїСЂРѕРіСЂР°РјРјРЅРѕРµ РѕР±РµСЃРїРµС‡РµРЅРёРµ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅРѕ РґР»СЏ СѓС‡РµС‚Р°\nРёРЅС„РѕСЂРјР°С†РёРё Рѕ РЅР°Р·РЅР°С‡РµРЅРЅС‹С… СЃС‚СѓРґРµРЅС‚Р°Рј СЃС‚РёРїРµРЅРґРёСЏС…,\nР° С‚Р°Рє Р¶Рµ РєРѕРЅС‚СЂРѕР»СЏ РІС‹РїР»Р°С‚ СЌС‚РёС… СЃС‚РёРїРµРЅРґРёР№.\nРђРІС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ СЃС‚СѓРґРµРЅС‚ РіСЂСѓРїРїС‹ 20Р’РћР­1:\nРќР°РіР°РµРІ Рњ.Рў.";
-            string caption = "РРЅС„РѕСЂРјР°С†РёСЏ Рѕ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРµ";
+            string message = "Данное программное обеспечение предназначено для учета\nинформации о назначенных студентам стипендиях,\nа так же контроля выплат этих стипендий.\nАвтор приложения студент группы 20ВОЭ1:\nНагаев М.Т.";
+            string caption = "Информация о разработчике";
             MessageBoxIcon icon = MessageBoxIcon.Information;
             MessageBoxButtons buttons = MessageBoxButtons.OK;
             MessageBox.Show(message, caption, buttons, icon);
@@ -48,7 +48,7 @@ namespace DBTest1
             studentTable.Show();
         }
 
-        //Р—Р°РїСЂРѕСЃС‹
+        //Запросы
 
         private void requestStudentsListMenuItem_Click(object sender, EventArgs e)
         {
@@ -56,36 +56,21 @@ namespace DBTest1
             studentListRequest.Show();
         }
 
-        private void СЃРїРёСЃРѕРєР’РёРґРѕРІРЎС‚РёРґРµРЅРґРёР№Р’РЈРєР°Р·Р°РЅРЅРѕРјР”РёРїР°Р·РѕРЅРµРЎСѓРјРјС‹РЎС‚РёРїРµРЅРґРёРёToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокВидовСтидендийВУказанномДипазонеСуммыСтипендииToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VIDSTIPRequest vidstipRequest = new VIDSTIPRequest();
             vidstipRequest.Show();
         }
 
-        private void СЃРїРёСЃРѕРєР’С‹РїР»Р°С‚РЈРєР°Р·Р°РЅРЅРѕРіРѕРЎС‚СѓРґРµРЅС‚Р°Р—Р°РЈРєР°Р·Р°РЅРЅС‹Р№РџРµСЂРёРѕРґToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокВыплатУказанногоСтудентаЗаУказанныйПериодToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VYPLATYRequest vyplatyRequest = new VYPLATYRequest();
             vyplatyRequest.Show();
         }
 
-        //РћС‚С‡РµС‚С‹
+        //Отчеты
 
-        public DataSet BindData()
-        {
-            DataSet _dataSet = new DataSet();
-            var con = new System.Data.SQLite.SQLiteConnection("Data Source=bd.db");
-            var cmd = new System.Data.SQLite.SQLiteCommand();
-            cmd.Connection = con;
-            cmd.CommandText = "select * from vidstip ORDER BY VIDSTIP";
-            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            da.Fill(_dataSet);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return _dataSet;
-        }
-
-        public DataTable BindData2()
+        public DataTable BindData()
         {
             DataTable dataTable = new DataTable();
             var con = new System.Data.SQLite.SQLiteConnection("Data Source=bd.db");
@@ -103,26 +88,34 @@ namespace DBTest1
         private void report1MenuItem_Click(object sender, EventArgs e)
         {
             Report report = new Report();
-            // Р”РѕР±Р°РІР»СЏРµРј РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С… РІ РѕС‚С‡РµС‚
+            // Добавляем источник данных в отчет
             DataTable dataTable = new DataTable();
-            dataTable = BindData2();
+            dataTable = BindData();
             report.RegisterData(dataTable, "VIDSTIP");
 
-            // РЎРѕР·РґР°РµРј РјР°РєРµС‚ РѕС‚С‡РµС‚Р°
-            report.Load("report1.frx"); // Р—Р°РјРµРЅРёС‚Рµ РЅР° РїСѓС‚СЊ Рє РІР°С€РµРјСѓ С„Р°Р№Р»Сѓ РѕС‚С‡РµС‚Р°
+            // Создаем макет отчета
+            report.Load("report1.frx"); // Замените на путь к вашему файлу отчета
             report.SetParameterValue("test", "paramValue");
 
-            // РќР°СЃС‚СЂР°РёРІР°РµРј РѕС‚С‡РµС‚
+            // Настраиваем отчет
             report.GetDataSource("VIDSTIP").Enabled = true;
 
-            // РџРµС‡Р°С‚Р°РµРј РѕС‚С‡РµС‚
+            // Печатаем отчет
             report.Prepare();
             report.Show();
         }
 
         private void report2MenuItem_Click(object sender, EventArgs e)
         {
+            report2Window report2Window1 = new report2Window();
+            report2Window1.Show();
+        }
 
+        private void report3MenuItem_Click(object sender, EventArgs e)
+        {
+            //список выплат указанного студента
+            report3Window report3Window1 = new report3Window();
+            report3Window1.Show();
         }
 
         private void stipsMenuItem_Click(object sender, EventArgs e)
@@ -137,14 +130,16 @@ namespace DBTest1
             studentsStipsTable.Show();
         }
 
-        private void РІРёРґРЎС‚РёРїРµРЅРґРёРёРќР°Р·РЅР°С‡Р°РµРјР°СЏToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видСтипендииНазначаемаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            VIDSTIP2Table vidstip2Table = new VIDSTIP2Table();
+            vidstip2Table.Show();
         }
 
-        private void СЃС‚СѓРґРµРЅС‚Р’С‹РїР»Р°С‚С‹РЎС‚СѓРґРµРЅС‚Р°ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void студентВыплатыСтудентаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            PAYOUTTable payoutTable = new PAYOUTTable();
+            payoutTable.Show();
         }
     }
 }
