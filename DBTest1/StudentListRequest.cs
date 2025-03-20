@@ -1,4 +1,4 @@
-п»їusing System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,9 +28,9 @@ namespace DBTest1
             command.CommandText = "SELECT FAMILIYA,IMYA,OTCHESTVO FROM STUDENT ORDER BY FAMILIYA";
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
+                if (reader.HasRows) // если есть данные
                 {
-                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
+                    while (reader.Read())   // построчно считываем данные
                     {
                         var fam = reader.GetValue(0);
                         var name = reader.GetValue(1);

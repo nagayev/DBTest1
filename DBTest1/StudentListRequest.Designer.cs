@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentListRequest));
             studentsGridView = new DataGridView();
             FAMILYA = new DataGridViewTextBoxColumn();
             IMYA = new DataGridViewTextBoxColumn();
@@ -112,6 +113,7 @@
             Controls.Add(quitButton);
             Controls.Add(printButton);
             Controls.Add(studentsGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "StudentListRequest";
             Text = "Список студентов в алфавитном порядке";
             Load += StudentListRequest_Load;

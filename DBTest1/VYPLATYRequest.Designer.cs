@@ -1,4 +1,4 @@
-п»їnamespace DBTest1
+﻿namespace DBTest1
 {
     partial class VYPLATYRequest
     {
@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VYPLATYRequest));
             vyplatyGridView = new DataGridView();
             DATAVYPLATY = new DataGridViewTextBoxColumn();
             SUMVYPLATY = new DataGridViewTextBoxColumn();
@@ -52,14 +53,14 @@
             vyplatyGridView.AllowUserToAddRows = false;
             vyplatyGridView.AllowUserToDeleteRows = false;
             vyplatyGridView.BackgroundColor = SystemColors.Window;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            vyplatyGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            vyplatyGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             vyplatyGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             vyplatyGridView.Columns.AddRange(new DataGridViewColumn[] { DATAVYPLATY, SUMVYPLATY });
             vyplatyGridView.Location = new Point(2, 3);
@@ -71,14 +72,14 @@
             // 
             // DATAVYPLATY
             // 
-            DATAVYPLATY.HeaderText = "Р”Р°С‚Р° РІС‹РїР»Р°С‚С‹";
+            DATAVYPLATY.HeaderText = "Дата выплаты";
             DATAVYPLATY.MinimumWidth = 6;
             DATAVYPLATY.Name = "DATAVYPLATY";
             DATAVYPLATY.Width = 339;
             // 
             // SUMVYPLATY
             // 
-            SUMVYPLATY.HeaderText = "РЎСѓРјРјР° РІС‹РїР»Р°С‚С‹";
+            SUMVYPLATY.HeaderText = "Сумма выплаты";
             SUMVYPLATY.MinimumWidth = 6;
             SUMVYPLATY.Name = "SUMVYPLATY";
             SUMVYPLATY.Width = 338;
@@ -90,7 +91,7 @@
             printButton.Name = "printButton";
             printButton.Size = new Size(94, 29);
             printButton.TabIndex = 4;
-            printButton.Text = "Р’С‹РІРµСЃС‚Рё";
+            printButton.Text = "Вывести";
             printButton.UseVisualStyleBackColor = true;
             printButton.Click += updateButton_Click;
             // 
@@ -101,7 +102,7 @@
             quitButton.Name = "quitButton";
             quitButton.Size = new Size(94, 29);
             quitButton.TabIndex = 5;
-            quitButton.Text = "РћС‚РјРµРЅРёС‚СЊ";
+            quitButton.Text = "Отменить";
             quitButton.UseVisualStyleBackColor = true;
             quitButton.Click += quitButton_Click;
             // 
@@ -113,7 +114,7 @@
             label2.Name = "label2";
             label2.Size = new Size(160, 18);
             label2.TabIndex = 7;
-            label2.Text = "Р¤Р°РјРёР»РёСЏ СЃС‚СѓРґРµРЅС‚Р°:";
+            label2.Text = "Фамилия студента:";
             // 
             // label3
             // 
@@ -123,7 +124,7 @@
             label3.Name = "label3";
             label3.Size = new Size(134, 18);
             label3.TabIndex = 9;
-            label3.Text = "РџРµСЂРёРѕРґ РІС‹РїР»Р°С‚:";
+            label3.Text = "Период выплат:";
             // 
             // famCombo
             // 
@@ -157,7 +158,7 @@
             label1.Name = "label1";
             label1.Size = new Size(34, 18);
             label1.TabIndex = 14;
-            label1.Text = "РћС‚:";
+            label1.Text = "От:";
             label1.Click += label1_Click_1;
             // 
             // label4
@@ -168,7 +169,7 @@
             label4.Name = "label4";
             label4.Size = new Size(34, 18);
             label4.TabIndex = 15;
-            label4.Text = "Р”Рѕ:";
+            label4.Text = "До:";
             // 
             // VYPLATYRequest
             // 
@@ -185,8 +186,9 @@
             Controls.Add(quitButton);
             Controls.Add(printButton);
             Controls.Add(vyplatyGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "VYPLATYRequest";
-            Text = "РЎРїРёСЃРѕРє РІС‹РїР»Р°С‚ СЃС‚СѓРґРµРЅС‚Р° Р·Р° СѓРєР°Р·Р°РЅРЅС‹Р№ РїРµСЂРёРѕРґ";
+            Text = "Список выплат студента за указанный период";
             Load += VYPLATYRequest_Load;
             ((System.ComponentModel.ISupportInitialize)vyplatyGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentBindingSource).EndInit();

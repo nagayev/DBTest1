@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentTable));
             studentsGridView = new DataGridView();
             NSTUDENT = new DataGridViewTextBoxColumn();
             FAMILYA = new DataGridViewTextBoxColumn();
@@ -158,6 +159,7 @@
             Controls.Add(editButton);
             Controls.Add(addButton);
             Controls.Add(studentsGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "StudentTable";
             Text = "Таблица: \"Студенты\"";
             Load += StudentTable_Load;

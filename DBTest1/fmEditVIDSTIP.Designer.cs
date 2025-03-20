@@ -1,4 +1,4 @@
-п»їnamespace DBTest1
+﻿namespace DBTest1
 {
     partial class fmEditVIDSTIP
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmEditVIDSTIP));
             label1 = new Label();
             label2 = new Label();
             vidstip = new TextBox();
@@ -45,7 +46,7 @@
             label1.Name = "label1";
             label1.Size = new Size(145, 24);
             label1.TabIndex = 0;
-            label1.Text = "Р’РёРґ СЃС‚РёРїРµРЅРґРёРё";
+            label1.Text = "Вид стипендии";
             // 
             // label2
             // 
@@ -55,7 +56,7 @@
             label2.Name = "label2";
             label2.Size = new Size(230, 24);
             label2.TabIndex = 1;
-            label2.Text = "РЎСѓРјРјР° СЃС‚РёРїРµРЅРґРёРё (СЂСѓР±.)";
+            label2.Text = "Сумма стипендии (руб.)";
             // 
             // vidstip
             // 
@@ -89,7 +90,7 @@
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(97, 29);
             cancelButton.TabIndex = 7;
-            cancelButton.Text = "РћС‚РјРµРЅРёС‚СЊ";
+            cancelButton.Text = "Отменить";
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
@@ -113,8 +114,9 @@
             Controls.Add(vidstip);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "fmEditVIDSTIP";
-            Text = "Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ Р·Р°РїРёСЃСЊ";
+            Text = "Редактировать запись";
             ResumeLayout(false);
             PerformLayout();
         }

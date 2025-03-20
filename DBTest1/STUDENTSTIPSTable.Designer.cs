@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(STUDENTSTIPSTable));
             studentGridView = new DataGridView();
             ID = new DataGridViewTextBoxColumn();
             FAMILIYA = new DataGridViewTextBoxColumn();
@@ -200,6 +201,7 @@
             Controls.Add(editButton);
             Controls.Add(addButton);
             Controls.Add(studentGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "STUDENTSTIPSTable";
             Text = "Таблица: \"Студент - назначаемая студенту стипендия\"";
             Load += STUDENTSTIPSTable_Load;

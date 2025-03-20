@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIDSTIPTable));
             vidstipGridView = new DataGridView();
             NVID = new DataGridViewTextBoxColumn();
             VIDSTIP = new DataGridViewTextBoxColumn();
@@ -151,6 +152,7 @@
             Controls.Add(editButton);
             Controls.Add(addButton);
             Controls.Add(vidstipGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "VIDSTIPTable";
             Text = "Таблица: \"Стипендии\"";
             Load += VIDSTIPTable_Load;

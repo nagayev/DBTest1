@@ -23,6 +23,11 @@ namespace DBTest1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            if (vyplatyGridView.Rows.Count == 0)
+            {
+                MessageBox.Show("Невозможно удалить запись!", "Ошибка");
+                return;
+            }
             DialogResult dialogResult = MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
@@ -40,6 +45,11 @@ namespace DBTest1
 
         private void editButton_Click(object sender, EventArgs e)
         {
+            if (vyplatyGridView.Rows.Count == 0)
+            {
+                MessageBox.Show("Невозможно отредактировать запись!", "Ошибка");
+                return;
+            }
             //Вид стипендии, сумма
             string date = vyplatyGridView.SelectedRows[0].Cells[1].Value.ToString();
             string sum = vyplatyGridView.SelectedRows[0].Cells[2].Value.ToString();

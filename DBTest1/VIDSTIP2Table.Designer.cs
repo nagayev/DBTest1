@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIDSTIP2Table));
             studentBindingSource = new BindingSource(components);
             addButton = new Button();
             editButton = new Button();
@@ -211,6 +212,7 @@
             Controls.Add(deleteButton);
             Controls.Add(editButton);
             Controls.Add(addButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "VIDSTIP2Table";
             Text = "Таблица: \"Вид стипендии - назначаемая студенту стипендия\"";
             Load += VIDSTIP2Table_Load;

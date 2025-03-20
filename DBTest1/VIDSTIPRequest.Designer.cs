@@ -1,4 +1,4 @@
-п»їnamespace DBTest1
+﻿namespace DBTest1
 {
     partial class VIDSTIPRequest
     {
@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIDSTIPRequest));
             vidstipGridView = new DataGridView();
             VIDSTIP = new DataGridViewTextBoxColumn();
             SUMSTIP = new DataGridViewTextBoxColumn();
@@ -69,14 +70,14 @@
             // 
             // VIDSTIP
             // 
-            VIDSTIP.HeaderText = "Р’РёРґ СЃС‚РёРїРµРЅРґРёРё";
+            VIDSTIP.HeaderText = "Вид стипендии";
             VIDSTIP.MinimumWidth = 6;
             VIDSTIP.Name = "VIDSTIP";
             VIDSTIP.Width = 339;
             // 
             // SUMSTIP
             // 
-            SUMSTIP.HeaderText = "РЎСѓРјРјР° СЃС‚РёРїРµРЅРґРёРё";
+            SUMSTIP.HeaderText = "Сумма стипендии";
             SUMSTIP.MinimumWidth = 6;
             SUMSTIP.Name = "SUMSTIP";
             SUMSTIP.Width = 338;
@@ -88,7 +89,7 @@
             printButton.Name = "printButton";
             printButton.Size = new Size(94, 29);
             printButton.TabIndex = 4;
-            printButton.Text = "Р’С‹РІРµСЃС‚Рё";
+            printButton.Text = "Вывести";
             printButton.UseVisualStyleBackColor = true;
             printButton.Click += updateButton_Click;
             // 
@@ -99,7 +100,7 @@
             quitButton.Name = "quitButton";
             quitButton.Size = new Size(94, 29);
             quitButton.TabIndex = 5;
-            quitButton.Text = "РћС‚РјРµРЅРёС‚СЊ";
+            quitButton.Text = "Отменить";
             quitButton.UseVisualStyleBackColor = true;
             quitButton.Click += quitButton_Click;
             // 
@@ -111,7 +112,7 @@
             label1.Name = "label1";
             label1.Size = new Size(144, 18);
             label1.TabIndex = 6;
-            label1.Text = "РЎСѓРјРјР° СЃС‚РёРїРµРЅРґРёРё";
+            label1.Text = "Сумма стипендии";
             label1.Click += label1_Click;
             // 
             // label2
@@ -122,7 +123,7 @@
             label2.Name = "label2";
             label2.Size = new Size(34, 18);
             label2.TabIndex = 7;
-            label2.Text = "РћС‚:";
+            label2.Text = "От:";
             // 
             // minTextbox
             // 
@@ -139,7 +140,7 @@
             label3.Name = "label3";
             label3.Size = new Size(34, 18);
             label3.TabIndex = 9;
-            label3.Text = "Р”Рѕ:";
+            label3.Text = "До:";
             // 
             // maxTextBox
             // 
@@ -162,8 +163,9 @@
             Controls.Add(quitButton);
             Controls.Add(printButton);
             Controls.Add(vidstipGridView);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "VIDSTIPRequest";
-            Text = "РЎРїРёСЃРѕРє РІРёРґРѕРІ СЃС‚РёРїРµРЅРґРёР№ РІ СѓРєР°Р·Р°РЅРЅРѕРј РґРёР°РїРѕР·РѕРЅРµ РІС‹РїР»Р°С‚";
+            Text = "Список видов стипендий в указанном диапозоне выплат";
             Load += VIDSTIPRequest_Load;
             ((System.ComponentModel.ISupportInitialize)vidstipGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentBindingSource).EndInit();
