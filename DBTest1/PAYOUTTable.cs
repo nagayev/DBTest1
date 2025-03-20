@@ -28,11 +28,12 @@ namespace DBTest1
             {
                 DataGridViewRow Current = vyplatyGridView.CurrentRow;
                 var studentId = studentGridView.CurrentRow.Cells[0].Value.ToString();
-                var nvidStr = Current.Cells[0].Value.ToString();
+                var data = Current.Cells[1].Value.ToString();
+                var sum = Current.Cells[2].Value.ToString();
                 vyplatyGridView.Rows.RemoveAt(Current.Index);
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"DELETE FROM VYPLATY WHERE NSTUDENT={studentId} AND DATAVYPLATY='{nvidStr}' AND SUMVYPLATY={sum})";
+                command.CommandText = $"DELETE FROM VYPLATY WHERE NSTUDENT={studentId} AND DATAVYPLATY='{data}' AND SUMVYPLATY={sum}";
                 int number = command.ExecuteNonQuery();
             }
         }
@@ -40,29 +41,28 @@ namespace DBTest1
         private void editButton_Click(object sender, EventArgs e)
         {
             //Вид стипендии, сумма
-            string vid = vyplatyGridView.SelectedRows[0].Cells[0].Value.ToString();
-            string sum = vyplatyGridView.SelectedRows[0].Cells[1].Value.ToString();
-            fmEditVIDSTIP2 fmEditVIDSTIP2 = new fmEditVIDSTIP2(vid, sum);
-            var result = fmEditVIDSTIP2.ShowDialog();
+            string date = vyplatyGridView.SelectedRows[0].Cells[1].Value.ToString();
+            string sum = vyplatyGridView.SelectedRows[0].Cells[2].Value.ToString();
+            fmAddPAYOUT fmEditPAYOUT = new fmAddPAYOUT(date, sum);
+            var result = fmEditPAYOUT.ShowDialog();
             if (result == DialogResult.OK)
             {
+                date = fmEditPAYOUT.data;
+                sum = fmEditPAYOUT.sum;
                 var selectedRows = studentGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
                     MessageBox.Show("Ошибка", "Не выбран!");
                     return;
                 }
-                string NVID_s = selectedRows[0].Cells[0].Value.ToString();
-                int NVID = Int32.Parse(NVID_s);
-                string VIDSTIP = fmEditVIDSTIP2.VIDSTIP;            //values preserved after close
-                string nstudent = selectedRows[0].Cells[0].Value.ToString(); //FIXME
-                string oldVIDSTIP = vid;
+                string number = vyplatyGridView.SelectedRows[0].Cells[0].Value.ToString();
+                
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE STIPENDIYA SET NSTUDENT = {nstudent}, NVID = (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}') WHERE NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{oldVIDSTIP}')";
-                int number = command.ExecuteNonQuery();
-                //vyplatyGridView.SelectedRows[0].Cells[0].Value = VIDSTIP;
-                //vyplatyGridView.SelectedRows[0].Cells[1].Value = SUMSTIP;
+                command.CommandText = $"UPDATE VYPLATY SET DATAVYPLATY = '{date}', SUMVYPLATY = {sum} WHERE NVYPLATY = {number}";
+                int number1 = command.ExecuteNonQuery();
+                vyplatyGridView.SelectedRows[0].Cells[1].Value = date;
+                vyplatyGridView.SelectedRows[0].Cells[2].Value = sum;
 
                 //studentsGridView.Rows.Add(autoincrementId, FAMILIYA, IMYA, OTCHESTVO);
             }

@@ -42,6 +42,7 @@
             VIDSTIP = new DataGridViewTextBoxColumn();
             SUMSTIP = new DataGridViewTextBoxColumn();
             studentGridView = new DataGridView();
+            NSTUDENT = new DataGridViewTextBoxColumn();
             FAMILIYA = new DataGridViewTextBoxColumn();
             IMYA = new DataGridViewTextBoxColumn();
             OTCHESTVO = new DataGridViewTextBoxColumn();
@@ -162,31 +163,41 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             studentGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             studentGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            studentGridView.Columns.AddRange(new DataGridViewColumn[] { FAMILIYA, IMYA, OTCHESTVO });
+            studentGridView.Columns.AddRange(new DataGridViewColumn[] { NSTUDENT, FAMILIYA, IMYA, OTCHESTVO });
             studentGridView.Location = new Point(0, 367);
             studentGridView.Name = "studentGridView";
             studentGridView.RowHeadersWidth = 20;
             studentGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             studentGridView.Size = new Size(971, 247);
             studentGridView.TabIndex = 7;
+            studentGridView.CellContentClick += studentGridView_CellContentClick;
+            // 
+            // NSTUDENT
+            // 
+            NSTUDENT.HeaderText = "Идентификатор студента";
+            NSTUDENT.MinimumWidth = 6;
+            NSTUDENT.Name = "NSTUDENT";
             // 
             // FAMILIYA
             // 
             FAMILIYA.HeaderText = "Фамилия";
             FAMILIYA.MinimumWidth = 6;
             FAMILIYA.Name = "FAMILIYA";
+            FAMILIYA.ReadOnly = true;
             // 
             // IMYA
             // 
             IMYA.HeaderText = "Имя";
             IMYA.MinimumWidth = 6;
             IMYA.Name = "IMYA";
+            IMYA.ReadOnly = true;
             // 
             // OTCHESTVO
             // 
             OTCHESTVO.HeaderText = "Отчество";
             OTCHESTVO.MinimumWidth = 6;
             OTCHESTVO.Name = "OTCHESTVO";
+            OTCHESTVO.ReadOnly = true;
             // 
             // VIDSTIP2Table
             // 
@@ -221,6 +232,7 @@
         private DataGridViewTextBoxColumn VIDSTIP;
         private DataGridViewTextBoxColumn SUMSTIP;
         private DataGridView studentGridView;
+        private DataGridViewTextBoxColumn NSTUDENT;
         private DataGridViewTextBoxColumn FAMILIYA;
         private DataGridViewTextBoxColumn IMYA;
         private DataGridViewTextBoxColumn OTCHESTVO;

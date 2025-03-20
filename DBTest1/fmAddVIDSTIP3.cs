@@ -11,13 +11,22 @@ using Microsoft.Data.Sqlite;
 
 namespace DBTest1
 {
-    public partial class fmAddVIDSTIP2 : Form
+    public partial class fmAddVIDSTIP3 : Form
     {
-        public string? VIDSTIP, SUMSTIP;
+        public string? nstudentId, familiya, imiya, otchestvo;
         private SqliteConnection connection;
-        public fmAddVIDSTIP2()
+
+        public fmAddVIDSTIP3()
         {
             InitializeComponent();
+        }
+        public fmAddVIDSTIP3(string id, string f, string i, string o)
+        {
+            InitializeComponent();
+            Text = "Редактировать запись";
+            FAMILIYA.Text = f;
+            IMYA.Text = i;
+            OTCHESTVO.Text = o;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -27,20 +36,22 @@ namespace DBTest1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            VIDSTIP = vidstip.Text;
-            SUMSTIP = sumstip.Text;
+            nstudentId = NSTUDENT.Text;
+            familiya = FAMILIYA.Text;
+            imiya = IMYA.Text;
+            otchestvo = OTCHESTVO.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void fmAddVIDSTIP2_Load(object sender, EventArgs e)
+        private void fmAddVIDSTIP3_Load(object sender, EventArgs e)
         {
             connection = new SqliteConnection("Data Source=bd.db");
             connection.Open();
             //Заполняем combobox
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
-            command.CommandText = "SELECT VIDSTIP FROM VIDSTIP";
+            command.CommandText = "SELECT NSTUDENT FROM STUDENT";
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
@@ -48,9 +59,9 @@ namespace DBTest1
                 {
                     while (reader.Read())   // построчно считываем данные
                     {
-                        var vidstip1 = reader.GetValue(0);
+                        var nstudent = reader.GetValue(0);
 
-                        vidstip.Items.Add(vidstip1.ToString());
+                        NSTUDENT.Items.Add(nstudent.ToString());
                     }
                 }
             }
@@ -58,10 +69,10 @@ namespace DBTest1
 
         private void vidstip_SelectedValueChanged(object sender, EventArgs e)
         {
-            var tmp = vidstip.SelectedItem.ToString();
+            var tmp = NSTUDENT.SelectedItem.ToString();
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
-            command.CommandText = $"SELECT SUMSTIP FROM VIDSTIP WHERE VIDSTIP='{tmp}'";
+            command.CommandText = $"SELECT FAMILIYA,IMYA,OTCHESTVO FROM STUDENT WHERE NSTUDENT='{tmp}'";
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
@@ -69,12 +80,31 @@ namespace DBTest1
                 {
                     while (reader.Read())   // построчно считываем данные
                     {
-                        var sumstip1 = reader.GetValue(0);
+                        var fam = reader.GetValue(0);
+                        var im = reader.GetValue(1);
+                        var otch = reader.GetValue(2);
 
-                        sumstip.Text = sumstip1.ToString();
+                        FAMILIYA.Text = fam.ToString();
+                        IMYA.Text = im.ToString();
+                        OTCHESTVO.Text = otch.ToString();
                     }
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sumstip_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NSTUDENT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

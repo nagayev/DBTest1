@@ -1,4 +1,4 @@
-п»їusing System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace DBTest1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("РЈРґР°Р»РµРЅРёРµ", "РЈРґР°Р»РёС‚СЊ С‚РµРєСѓС‰СѓСЋ Р·Р°РїРёСЃСЊ", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 DataGridViewRow Current = vidstipGridView.CurrentRow;
@@ -39,7 +39,7 @@ namespace DBTest1
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            //Р’РёРґ СЃС‚РёРїРµРЅРґРёРё, СЃСѓРјРјР°
+            //Вид стипендии, сумма
             string vid = vidstipGridView.SelectedRows[0].Cells[0].Value.ToString();
             string sum = vidstipGridView.SelectedRows[0].Cells[1].Value.ToString();
             fmEditVIDSTIP2 fmEditVIDSTIP2 = new fmEditVIDSTIP2(vid, sum);
@@ -49,12 +49,13 @@ namespace DBTest1
                 var selectedRows = studentGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
-                    MessageBox.Show("РћС€РёР±РєР°", "РќРµ РІС‹Р±СЂР°РЅ!");
+                    MessageBox.Show("Ошибка", "Не выбран!");
                     return;
                 }
                 string NVID_s = selectedRows[0].Cells[0].Value.ToString();
                 int NVID = Int32.Parse(NVID_s);
                 string VIDSTIP = fmEditVIDSTIP2.VIDSTIP;            //values preserved after close
+                string sum1 = fmEditVIDSTIP2.SUMSTIP;
                 string nstudent = selectedRows[0].Cells[0].Value.ToString(); //FIXME
                 string oldVIDSTIP = vid;
                 SqliteCommand command = new SqliteCommand();
@@ -62,7 +63,7 @@ namespace DBTest1
                 command.CommandText = $"UPDATE STIPENDIYA SET NSTUDENT = {nstudent}, NVID = (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}') WHERE NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{oldVIDSTIP}')";
                 int number = command.ExecuteNonQuery();
                 vidstipGridView.SelectedRows[0].Cells[0].Value = VIDSTIP;
-                vidstipGridView.SelectedRows[0].Cells[1].Value = SUMSTIP;
+                vidstipGridView.SelectedRows[0].Cells[1].Value = sum1;
 
                 //studentsGridView.Rows.Add(autoincrementId, FAMILIYA, IMYA, OTCHESTVO);
             }
@@ -97,9 +98,9 @@ namespace DBTest1
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
+                if (reader.HasRows) // если есть данные
                 {
-                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
+                    while (reader.Read())   // построчно считываем данные
                     {
                         var id = reader.GetValue(0);
                         var fam = reader.GetValue(1);
@@ -142,9 +143,9 @@ namespace DBTest1
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
+                if (reader.HasRows) // если есть данные
                 {
-                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
+                    while (reader.Read())   // построчно считываем данные
                     {
                         var vidstip = reader.GetValue(0);
                         var sumstip = reader.GetValue(1);

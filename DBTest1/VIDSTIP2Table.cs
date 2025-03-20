@@ -26,43 +26,46 @@ namespace DBTest1
             DialogResult dialogResult = MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                DataGridViewRow Current = vidstipGridView.CurrentRow;
+                DataGridViewRow Current = studentGridView.CurrentRow;
                 var studentId = studentGridView.CurrentRow.Cells[0].Value.ToString();
-                var nvidStr = Current.Cells[0].Value.ToString();
-                vidstipGridView.Rows.RemoveAt(Current.Index);
+                var nvid = vidstipGridView.CurrentRow.Cells[0].Value.ToString();
+                studentGridView.Rows.RemoveAt(Current.Index);
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"DELETE FROM STIPENDIYA WHERE NSTUDENT={studentId} AND NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{nvidStr}')";
+                command.CommandText = $"DELETE FROM STIPENDIYA WHERE NSTUDENT={studentId} AND NVID={nvid}";
                 int number = command.ExecuteNonQuery();
             }
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            //Вид стипендии, сумма
-            string vid = vidstipGridView.SelectedRows[0].Cells[0].Value.ToString();
-            string sum = vidstipGridView.SelectedRows[0].Cells[1].Value.ToString();
-            fmEditVIDSTIP2 fmEditVIDSTIP2 = new fmEditVIDSTIP2(vid, sum);
-            var result = fmEditVIDSTIP2.ShowDialog();
+            string oldid = studentGridView.SelectedRows[0].Cells[0].Value.ToString();
+            string fam = studentGridView.SelectedRows[0].Cells[1].Value.ToString();
+            string im = studentGridView.SelectedRows[0].Cells[2].Value.ToString();
+            var otch = studentGridView.SelectedRows[0].Cells[3].Value.ToString();
+
+            fmAddVIDSTIP3 fmEditVIDSTIP3 = new fmAddVIDSTIP3(oldid, fam, im,otch);
+            var result = fmEditVIDSTIP3.ShowDialog();
             if (result == DialogResult.OK)
             {
-                var selectedRows = studentGridView.SelectedRows;
+                var selectedRows = vidstipGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
                     MessageBox.Show("Ошибка", "Не выбран!");
                     return;
                 }
-                string NVID_s = selectedRows[0].Cells[0].Value.ToString();
-                int NVID = Int32.Parse(NVID_s);
-                string VIDSTIP = fmEditVIDSTIP2.VIDSTIP;            //values preserved after close
-                string nstudent = selectedRows[0].Cells[0].Value.ToString(); //FIXME
-                string oldVIDSTIP = vid;
+                string nstudentId = fmEditVIDSTIP3.nstudentId;
+                string nvid = vidstipGridView.SelectedRows[0].Cells[0].Value.ToString();
+                fam = fmEditVIDSTIP3.familiya;
+                im = fmEditVIDSTIP3.imiya;
+                otch = fmEditVIDSTIP3.otchestvo;
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE STIPENDIYA SET NSTUDENT = {nstudent}, NVID = (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}') WHERE NVID=(SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{oldVIDSTIP}')";
+                command.CommandText = $"UPDATE STIPENDIYA SET NSTUDENT = {nstudentId} WHERE NSTUDENT = {oldid} AND NVID = {nvid}";
                 int number = command.ExecuteNonQuery();
-                vidstipGridView.SelectedRows[0].Cells[0].Value = VIDSTIP;
-                vidstipGridView.SelectedRows[0].Cells[1].Value = SUMSTIP;
+                studentGridView.SelectedRows[0].Cells[1].Value = fam;
+                studentGridView.SelectedRows[0].Cells[2].Value = im;
+                studentGridView.SelectedRows[0].Cells[3].Value = otch;
 
                 //studentsGridView.Rows.Add(autoincrementId, FAMILIYA, IMYA, OTCHESTVO);
             }
@@ -70,21 +73,23 @@ namespace DBTest1
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            fmAddVIDSTIP2 fmVidStip2 = new fmAddVIDSTIP2();
-            var result = fmVidStip2.ShowDialog();
+            fmAddVIDSTIP3 fmVidStip3 = new fmAddVIDSTIP3();
+            var result = fmVidStip3.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string VIDSTIP = fmVidStip2.VIDSTIP;            //values preserved after close
-                string SUMSTIP = fmVidStip2.SUMSTIP;
-                var nstudent = studentGridView.SelectedRows[0].Cells[0].Value.ToString();
+                string nstudentId = fmVidStip3.nstudentId;            //values preserved after close
+                string fam = fmVidStip3.familiya;
+                string im = fmVidStip3.imiya;
+                string otch = fmVidStip3.otchestvo;
+                string nvid = vidstipGridView.SelectedRows[0].Cells[0].Value.ToString();
                 //Do something here with these values
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"INSERT INTO STIPENDIYA(NSTUDENT,NVID) VALUES ({nstudent}, (SELECT NVID FROM VIDSTIP WHERE VIDSTIP='{VIDSTIP}'))";
+                command.CommandText = $"INSERT INTO STIPENDIYA(NSTUDENT,NVID) VALUES ({nstudentId}, {nvid})";
                 int number = command.ExecuteNonQuery();
                 //for example
                 autoincrementId++;
-                vidstipGridView.Rows.Add(VIDSTIP, SUMSTIP);
+                studentGridView.Rows.Add(nstudentId, fam, im, otch);
             }
         }
 
@@ -138,7 +143,7 @@ namespace DBTest1
             command.Connection = connection;
             var nvid = vidstipGridView.SelectedRows[0].Cells[0].Value;
             //Нужно выбрать студентов, которые получают например повышенную стипендию (т.е стипендию с определенным номером)
-            command.CommandText = $"SELECT FAMILIYA,IMYA,OTCHESTVO FROM STUDENT WHERE NSTUDENT IN (SELECT NSTUDENT FROM STIPENDIYA WHERE NVID={nvid})";
+            command.CommandText = $"SELECT NSTUDENT,FAMILIYA,IMYA,OTCHESTVO FROM STUDENT WHERE NSTUDENT IN (SELECT NSTUDENT FROM STIPENDIYA WHERE NVID={nvid})";
 
             using (SqliteDataReader reader = command.ExecuteReader())
             {
@@ -146,15 +151,20 @@ namespace DBTest1
                 {
                     while (reader.Read())   // построчно считываем данные
                     {
-                        var fam = reader.GetValue(0);
-                        var im = reader.GetValue(1);
-                        var otch = reader.GetValue(2);
+                        var nstudent = reader.GetValue(0);
+                        var fam = reader.GetValue(1);
+                        var im = reader.GetValue(2);
+                        var otch = reader.GetValue(3);
 
-                        studentGridView.Rows.Add(fam, im, otch);
+                        studentGridView.Rows.Add(nstudent, fam, im, otch);
                     }
                 }
             }
         }
 
+        private void studentGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

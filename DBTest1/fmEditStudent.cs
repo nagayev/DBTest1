@@ -1,4 +1,4 @@
-п»їusing System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +14,12 @@ namespace DBTest1
     public partial class fmEditSTUDENT : Form
     {
         public string? FAMILYA, IMYA, OTCHESTVO;
-        public fmEditSTUDENT()
+        public fmEditSTUDENT(string f, string i, string o)
         {
             InitializeComponent();
+            familiya.Text = f;
+            imia.Text = i;
+            otchestvo.Text = o;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

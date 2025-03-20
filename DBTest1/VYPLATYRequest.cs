@@ -1,4 +1,4 @@
-п»їusing System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,44 +24,25 @@ namespace DBTest1
         {
             DateTime fromDate = fromDatePicker.Value;
             DateTime toDate = toDatePicker.Value;
-            //seconds, not js ms
-            long p = ((DateTimeOffset)fromDate).ToUnixTimeSeconds();
-            MessageBox.Show(p.ToString(),"a");
-            var selected = famCombo.SelectedValue;
-            long unixTime = ((DateTimeOffset)fromDate).ToUnixTimeSeconds();
-            if (selected == null)
-            {
-                MessageBox.Show("РќРµРєРѕСЂСЂРµРєС‚РЅРѕ РІРІРµРґРµРЅС‹ РґР°РЅРЅС‹Рµ", "РћС€РёР±РєР°");
-                return;
-            }
+            string fam = famCombo.Text;
             vyplatyGridView.Rows.Clear();
-            string fam = selected.ToString();
             SqliteCommand command = new SqliteCommand();
             command.Connection = connection;
-            int min, max;
-            try
-            {
-                min = 2000;
-                max = 5000;
-                /*min = Int32.Parse(minTextbox.Text);
-                max = Int32.Parse(maxTextBox.Text);*/
-            }
-            catch
-            {
-                MessageBox.Show("РћС€РёР±РєР°", "РќРµРєРѕСЂСЂРµРєС‚РЅРѕ РІРІРµРґРµРЅС‹ РґР°РЅРЅС‹Рµ");
-                return;
-            }
-            command.CommandText = $"SELECT VIDSTIP,SUMSTIP FROM VIDSTIP WHERE SUMSTIP BETWEEN {min} AND {max}";
+            //Костыль: фильтрация данных на клиенте
+            command.CommandText = $"SELECT DATAVYPLATY,SUMVYPLATY FROM VYPLATY WHERE NSTUDENT=(SELECT NSTUDENT FROM STUDENT WHERE FAMILIYA='{fam}')";
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
+                if (reader.HasRows) // если есть данные
                 {
-                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
+                    while (reader.Read())   // построчно считываем данные
                     {
-                        var vidstip = reader.GetValue(0);
-                        var sumstip = reader.GetValue(1);
-
-                        vyplatyGridView.Rows.Add(vidstip, sumstip);
+                        var data = reader.GetValue(0).ToString();
+                        var sum = reader.GetValue(1);
+                        //Check data in period
+                        DateTime d = DateTime.ParseExact(data, "dd.MM.yy", System.Globalization.CultureInfo.InvariantCulture);
+                        if (d >= fromDate && d <= toDate) {
+                            vyplatyGridView.Rows.Add(data, sum);
+                        }
                     }
                 }
             }

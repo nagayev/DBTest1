@@ -20,6 +20,15 @@ namespace DBTest1
             InitializeComponent();
         }
 
+        public fmAddPAYOUT(string d, string s)
+        {
+            InitializeComponent();
+            DateTime date = DateTime.ParseExact(d,"dd.MM.yy", System.Globalization.CultureInfo.InvariantCulture);
+            dateTimePicker1.Value = date;
+            sumvyplaty.Text = s;
+            Text = "Изменить запись";
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();

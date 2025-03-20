@@ -13,6 +13,9 @@
     <Compile Update="fmAddVIDSTIP2.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="fmAddVIDSTIP3.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="fmEditStudent.cs">
       <SubType>Form</SubType>
     </Compile>

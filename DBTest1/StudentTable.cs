@@ -1,4 +1,4 @@
-п»їusing System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace DBTest1
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult =  MessageBox.Show("РЈРґР°Р»РµРЅРёРµ", "РЈРґР°Р»РёС‚СЊ С‚РµРєСѓС‰СѓСЋ Р·Р°РїРёСЃСЊ", MessageBoxButtons.YesNo);
+            DialogResult dialogResult =  MessageBox.Show("Удаление", "Удалить текущую запись", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 DataGridViewRow Current = studentsGridView.CurrentRow;
@@ -38,14 +38,17 @@ namespace DBTest1
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            fmEditSTUDENT fmEditSTUDENT = new fmEditSTUDENT();
+            string fam = studentsGridView.CurrentRow.Cells[1].Value.ToString();
+            string im = studentsGridView.CurrentRow.Cells[2].Value.ToString();
+            string otch = studentsGridView.CurrentRow.Cells[3].Value.ToString();
+            fmEditSTUDENT fmEditSTUDENT = new fmEditSTUDENT(fam, im, otch);
             var result = fmEditSTUDENT.ShowDialog();
             if (result == DialogResult.OK)
             {
                 var selectedRows = studentsGridView.SelectedRows;
                 if (selectedRows.Count == 0)
                 {
-                    MessageBox.Show("РћС€РёР±РєР°","РќРµ РІС‹Р±СЂР°РЅ!");
+                    MessageBox.Show("Ошибка","Не выбран!");
                     return;
                 }
                 string NSTUDENT_s = selectedRows[0].Cells[0].Value.ToString();
@@ -57,7 +60,6 @@ namespace DBTest1
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
                 command.CommandText = $"UPDATE STUDENT SET FAMILIYA='{FAMILIYA}', IMYA='{IMYA}',OTCHESTVO='{OTCHESTVO}' WHERE NSTUDENT={NSTUDENT}";
-                MessageBox.Show(command.CommandText, "a");
                 int number = command.ExecuteNonQuery();
                 //for example
                 selectedRows[0].Cells[1].Value = FAMILIYA;
@@ -100,9 +102,9 @@ namespace DBTest1
             
             using (SqliteDataReader reader = command.ExecuteReader())
             {
-                if (reader.HasRows) // РµСЃР»Рё РµСЃС‚СЊ РґР°РЅРЅС‹Рµ
+                if (reader.HasRows) // если есть данные
                 {
-                    while (reader.Read())   // РїРѕСЃС‚СЂРѕС‡РЅРѕ СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ
+                    while (reader.Read())   // построчно считываем данные
                     {
                         var id = reader.GetValue(0);
                         var fam = reader.GetValue(1);
